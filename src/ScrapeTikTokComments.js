@@ -83,7 +83,7 @@ with({
     }
 
     // Loading 1st level comments
-    var loadingCommentsBuffer = 30; // increase buffer if loading comments takes long and the loop breaks too soon
+    var loadingCommentsBuffer = 15; // increase buffer if loading comments takes long and the loop breaks too soon
     var numOfcommentsBeforeScroll = getAllComments().length;
     while (loadingCommentsBuffer > 0) {
 
@@ -112,7 +112,7 @@ with({
 
 
     // Loading 2nd level comments
-    loadingCommentsBuffer = 5; // increase buffer if loading comments takes long and the loop breaks too soon
+    loadingCommentsBuffer = 7; // increase buffer if loading comments takes long and the loop breaks too soon
     while (loadingCommentsBuffer > 0) {
         readMoreDivs = getElementsByXPath(viewMoreDivXPath);
         for (var i = 0; i < readMoreDivs.length; i++) {
@@ -146,22 +146,7 @@ with({
     var shares = likesCommentsShares[2] ? likesCommentsShares[2].outerText : "N/A";
     var commentNumberDifference = Math.abs(parseInt(totalComments) - (comments.length));
 
-
-    var csv = 'Now,' + Date() + '\n';
-    csv += 'Post URL,' + url + '\n';
-    csv += 'Publisher Nickname,' + nicknameAndTimePublishedAgo[0] + '\n';
-    csv += 'Publisher @,' + publisherProfileUrl + '\n';
-    csv += 'Publisher URL,' + "https://www.tiktok.com/@" + publisherProfileUrl + '\n';
-    csv += 'Publish Time,' + formatDate(nicknameAndTimePublishedAgo[1]) + '\n';
-    csv += 'Post Likes,' + likes + '\n';
-    csv += 'Post Shares,' + shares + '\n';
-    csv += 'Description,' + quoteString(getElementsByXPath(descriptionXPath)[0].outerText) + '\n';
-    csv += 'Number of 1st level comments,' + (comments.length - level2CommentsLength) + '\n';
-    csv += 'Number of 2nd level comments,' + level2CommentsLength + '\n';
-    csv += '"Total Comments (actual, in this list, rendered in the comment section; needs all comments to be loaded!)",' + (comments.length) + '\n';
-    csv += "Total Comments (which TikTok tells you; it's too high most of the time when dealing with many comments OR way too low because TikTok limits the number of comments to prevent scraping)," + totalComments + '\n';
-    csv += "Difference," + commentNumberDifference + '\n';
-    csv += 'Comment Number (ID),Nickname,User @,User URL,Comment Text,Time,Likes,Profile Picture URL,Is 2nd Level Comment,User Replied To,Number of Replies\n';
+    csv = 'Comment Number (ID),Nickname,User @,User URL,Comment Text,Time,Likes,Profile Picture URL,Is 2nd Level Comment,User Replied To,Number of Replies\n';
 
     var count = 1;
     var totalReplies = 0;
