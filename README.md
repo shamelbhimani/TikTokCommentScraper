@@ -9,13 +9,12 @@ running on (**Windows**, for Linux see below), so it's instantly usable also for
 The python environment is heavily stripped down (\~7MB).
 Installation is as easy as:
 
-`git clone https://github.com/cubernetes/TikTokCommentScraper`
+`git clone https://github.com/ShamelB/TikTokCommentScraper`
 
-Alternatively, download the zip directly if you don't have git installed:
+Alternatively, download the zip directly if you don't have git installed from the repistory if you don't have git installed:
 
-`curl -L -o "TikTokCmtScraper.zip" https://github.com/cubernetes/TikTokCommentScraper/archive/refs/heads/main.zip`
+![Download from github directly](https://prnt.sc/-GTjxZm45jic)
 
-If you're running Windows 7 and therefore don't even have curl installed, just download the zip directly from this repo and extract it.
 
 # Requirements
 Python requirements would be (if you don't want to use the venv or if you aren't using Windows):
@@ -25,55 +24,53 @@ Python requirements would be (if you don't want to use the venv or if you aren't
 `openpyxl`
 
 # Usage
-## TL;DR
-- open your favorite **chromium** (e. g. Chrome, Brave, Chromium) based browser
-- go to the TikTok post you want to scrape the comments from (make sure you can already scroll the comments manually)
-- press F12 (goto developer console) or CTRL+SHIFT+J (should open the console directly)
-- open Windows file explorer in root of this project folder (where the .cmd files are)
-- double click 'Copy JavaScript for Developer Console.cmd'
-	- **if you're not using Windows**, just run the src/CopyJavascript.py file manually with python (see requirements)
-- go back to developer console; paste the javascript; run it
-- wait until it says 'CSV copied to clipboard!'
-- go back to file explorer; double click 'Extract Comments from Clipboard.cmd'
-	- **if you're not using Windows**, just run the src/ScrapeTikTokComments.py file manually with python (see requirements)
-- voilá, the file 'Comments_<UtcTimeStamp>.xlsx' will now contain all the comments and additional information
+
+### Step 1
+Open the main installation folder and click the batch file named 'Copy JavaScript for Developer Console.cmd'.
+This will open a command-line terminal and execute the python script that copies the JavaScript code onto your active clipboard.
+After running this, feel free to close the terminal or wait for it to auto-close.
+![Step 1 displaying the file labelled 'Copy JavaScript for Developor Console.cmd'](https://prnt.sc/_896Ix-rXVww)
+
+### Step 2
+Open your Chromium-based browser (Chrome, Brave etc.) and open the TikTok video that you want to download the comments from.
+This page will show you the number of comments that are on this TikTok.
+![Step 2 displaying number of comments](https://prnt.sc/rdzOFqlPoF7a)
+
+### Step 3
+Scroll all the way to the bottom of the page until all comments are loaded. 
+Press F12, or Shift + CTRL + J on your keyboard to open the Console. Paste the JavaScript code (Reference Step 1) into the console and hit Enter.
+![Step 3 displaying console](https://prnt.sc/qMm42VoOXiv8)
+
+You script should take some time to execute with an incremental difference based on how many comments are being scraped, and loaded.
+This is what the final output in the console should look like once the script has executed successfully.
+![Step 3 output](https://prnt.sc/vHZsalAbaSdA)
+
+### Step 4
+Your data is now copied to the clipboard. Open the batch file labelled 'Extract Comments from Clipboard.cmd'.
+This file will create an excel workbook and turn the data you have scraped using the console of your browser into it.
+![Step 4 2nd file](https://prnt.sc/pHMQ8hOQJQPH)
+
+### Step 5
+Set a name for your new workbook. The name format is 'Scrape_<name_of_your_choice>_SYSTEMDATE'.
+You should select an appropriate name. For the purpose of easy recordkeeping, use the video ID in the link:
+![Step 5 set a name for the file](https://prnt.sc/0JDHknPAkJi4)
+
+### Step 6
+Once the process is complete, press any key to close the terminal.
+Your workbook is now saved in the 'output' folder of your repositroy. Do not worry if you do not see this file, the program is designed to create this folder if it does not exist:
+![Step 6 to retrieve output](https://prnt.sc/jSfOCDQ7OIIQ)
 
 You can also watch this video: https://youtu.be/FsQEm2zalWA
 or if you don't have time: https://youtu.be/lYZw75k7QVc
 
-## In Detail
+# Debugging
 
-This comment scraper uses the chrome developer console (chromium based browser
-recommended/maybe needed), JavaScript and Python. The JavaScript (which is
-documentated and located in 'src\ScrapeTikTokComments.js') is copied to the clipboard when the '.\Copy
-JavaScript for Developer Console.cmd' file is run (you can also copy
-manually or run src/CopyJavascript.py). With the TikTok post open (so you can see and scroll the
-comments), open the developer console with F12, CTRL+SHIFT+I/J, CTRL+SHIFT+C
-or somehow through the settings. In the interactive console tab, paste the
-JavaScript and execute it. To be sure the JavaScript hasn't been tampered,
-you should maybe look through it once more before you run it to look out for
-anything malicious. The original file doesn't make any requests; the clipboard action
-is the only security critical task. NEVER mindlessly paste anything into the developer console (copying
-foreign code to the console is considered a big security risk)! 
+### Infinite Buffer
+During Step 3, your script may be stuck in an infite loop of 'Buffer 5'. To work around this, change the buffer value from '5' to '0'
+for the section 'Loading 2nd Level comments':
+![Debugging 1](https://prnt.sc/8J5x52O294oD)
 
-After you've ran the JavaScript, wait. Depending on the number of comments, it
-should go reasonable fast. Anything below 200 comments should go quite quick,
-anything below 3000 comments should be done in under 5 minutes and the
-performance usually shouldn't suffer. While you wait, the JavaScript scrolls
-to the last loaded comments which forces TikTok to load new comments. This
-process is repeated until no new comments load for a few iterations. Then the
-2nd level comments get loaded (all the replies). The JavaScript clicks all the
-'Read More' buttons until no more new comments appear for 5 iterations. After those
-2 processes, all comments should be rendered. In the 3rd phase, the JavaScript reads
-all the comments and organizes them and converts them to CSV format. In the end, one big
-string that is in CSV-format will be copied to the clipboard.
-
-When the debug message 'CSV copied to clipboard!' appears, it's finished. Now,
-without copying anything new obviously, click the 'Extract Comments from
-Clipboard.cmd' file or run the src/ScrapeTikTokComments.py file manually (see requirements).
-It will fetch the CSV-formatted clipboard content and
-convert it to a .xlsx file which can be opened in e.g. LibreOffice Calc or
-Microsoft Excel.
+This will ensure you exit out of the loop when trying to load replies/2nd level comments.
 
 # Limits
 
@@ -88,3 +85,7 @@ load/render all comments, you only count e.g. 740 comments, which happens
 pretty much always with many comments. In the 3000 comments test, 64 comments
 were never loaded and therefore not included in the .xlsx file. Fortunately,
 this percentage is negligible most of the time.
+
+# Roadmap
+1. Enable usage on MacOS (Expected delivery on 14th May, 2024).
+2. Rebuild using Python only (Unknown expected delivery).
