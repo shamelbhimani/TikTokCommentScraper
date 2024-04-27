@@ -13,7 +13,7 @@ Installation is as easy as:
 
 Alternatively, download the zip directly if you don't have git installed from the repistory if you don't have git installed:
 
-![Download from github directly](https://imgur.com/71sxPhl)
+![Download from github directly](images/Screenshot_1.png)
 
 
 # Requirements
@@ -29,36 +29,36 @@ Python requirements would be (if you don't want to use the venv or if you aren't
 Open the main installation folder and click the batch file named 'Copy JavaScript for Developer Console.cmd'.
 This will open a command-line terminal and execute the python script that copies the JavaScript code onto your active clipboard.
 After running this, feel free to close the terminal or wait for it to auto-close.
-![Step 1 displaying the file labelled 'Copy JavaScript for Developor Console.cmd'](https://prnt.sc/_896Ix-rXVww)
+![Step 1 displaying the file labelled 'Copy JavaScript for Developor Console.cmd'](images/Screenshot_2.png)
 
 ### Step 2
 Open your Chromium-based browser (Chrome, Brave etc.) and open the TikTok video that you want to download the comments from.
 This page will show you the number of comments that are on this TikTok.
-![Step 2 displaying number of comments](https://prnt.sc/rdzOFqlPoF7a)
+![Step 2 displaying number of comments](images/Screenshot_3.png)
 
 ### Step 3
 Scroll all the way to the bottom of the page until all comments are loaded. 
 Press F12, or Shift + CTRL + J on your keyboard to open the Console. Paste the JavaScript code (Reference Step 1) into the console and hit Enter.
-![Step 3 displaying console](https://prnt.sc/qMm42VoOXiv8)
+![Step 3 displaying console](images/Screenshot_4.png)
 
 You script should take some time to execute with an incremental difference based on how many comments are being scraped, and loaded.
 This is what the final output in the console should look like once the script has executed successfully.
-![Step 3 output](https://prnt.sc/vHZsalAbaSdA)
+![Step 3 output](images/Screenshot_5.png)
 
 ### Step 4
 Your data is now copied to the clipboard. Open the batch file labelled 'Extract Comments from Clipboard.cmd'.
 This file will create an excel workbook and turn the data you have scraped using the console of your browser into it.
-![Step 4 2nd file](https://prnt.sc/pHMQ8hOQJQPH)
+![Step 4 2nd file](images/Screenshot_6.png)
 
 ### Step 5
 Set a name for your new workbook. The name format is 'Scrape_<name_of_your_choice>_SYSTEMDATE'.
 You should select an appropriate name. For the purpose of easy recordkeeping, use the video ID in the link:
-![Step 5 set a name for the file](https://prnt.sc/0JDHknPAkJi4)
+![Step 5 set a name for the file](images/Screenshot_7.png)
 
 ### Step 6
 Once the process is complete, press any key to close the terminal.
 Your workbook is now saved in the 'output' folder of your repositroy. Do not worry if you do not see this file, the program is designed to create this folder if it does not exist:
-![Step 6 to retrieve output](https://prnt.sc/jSfOCDQ7OIIQ)
+![Step 6 to retrieve output](images/Screenshot_8.png)
 
 You can also watch this video: https://youtu.be/FsQEm2zalWA
 or if you don't have time: https://youtu.be/lYZw75k7QVc
@@ -68,7 +68,7 @@ or if you don't have time: https://youtu.be/lYZw75k7QVc
 ### Infinite Buffer
 During Step 3, your script may be stuck in an infite loop of 'Buffer 5'. To work around this, change the buffer value from '5' to '0'
 for the section 'Loading 2nd Level comments':
-![Debugging 1](https://prnt.sc/8J5x52O294oD)
+![Debugging 1](images/Screenshot_9.png)
 
 This will ensure you exit out of the loop when trying to load replies/2nd level comments.
 
