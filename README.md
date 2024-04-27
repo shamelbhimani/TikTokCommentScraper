@@ -1,3 +1,5 @@
+Credit: All original credit goes to cubernetes for making the original version.
+
 # Functionality
 This comment scraper/extractor manages to get all the comments
 from virtually any TikTok post. This can be useful for giveaways, votes or other bigger
