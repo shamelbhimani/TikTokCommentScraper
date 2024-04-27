@@ -1,5 +1,3 @@
-Credit: All original credit goes to cubernetes for making the original version.
-
 # Functionality
 This comment scraper/extractor manages to get all the comments
 from virtually any TikTok post. This can be useful for giveaways, votes or other bigger
@@ -91,3 +89,6 @@ this percentage is negligible most of the time.
 # Roadmap
 1. Enable usage on MacOS (Expected delivery on 14th May, 2024).
 2. Rebuild using Python only (Unknown expected delivery).
+
+
+Credit: All original credit goes to cubernetes for making the original version.
