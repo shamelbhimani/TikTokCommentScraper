@@ -13,7 +13,7 @@ Installation is as easy as:
 
 Alternatively, download the zip directly if you don't have git installed from the repistory if you don't have git installed:
 
-![Download from github directly](https://prnt.sc/-GTjxZm45jic)
+![Download from github directly](https://prnt.sc/-GTjxZm45jic.png)
 
 
 # Requirements
