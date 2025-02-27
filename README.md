@@ -1,3 +1,5 @@
+# NOTE: PROJECT DEPRECATED AND NO LONGER SUPPORTED
+
 # Functionality
 This comment scraper/extractor manages to get all the comments
 from virtually any TikTok post. This can be useful for giveaways, votes or other bigger
